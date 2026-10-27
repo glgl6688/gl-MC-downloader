@@ -1,0 +1,25 @@
+﻿# Godot 缓存
+.godot/
+*.translation
+
+# 导出产物
+build/
+export/
+*.exe
+*.pck
+*.zip
+
+# 运行期日志（软件启动时自动生成）
+g-log-l.md
+logs/
+
+# 临时文件
+*.part
+*.tmp
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# 编辑器
+.vscode/
+.idea/

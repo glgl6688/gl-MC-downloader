@@ -1,0 +1,699 @@
+[gd_scene format=3 uid="uid://b7mc8dl0adown"]
+
+[ext_resource type="Script" uid="uid://gf54a6f8v3du" path="res://scripts/ui/download_page.gd" id="1_page"]
+[ext_resource type="Script" uid="uid://cj7pkh6l5fgmx" path="res://scripts/ui/spinner.gd" id="2_spinner"]
+[ext_resource type="Shader" uid="uid://cj6d4sworclod" path="res://shaders/bg.gdshader" id="3_bgshader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bg"]
+shader = ExtResource("3_bgshader")
+shader_parameter/base_color = Color(0.101961, 0.109804, 0.125489, 1)
+shader_parameter/glow_color = Color(0.29, 0.62, 1, 1)
+shader_parameter/drift_speed = 0.15
+shader_parameter/glow_strength = 0.2
+
+[node name="DownloadPage" type="Control" unique_id=1092166951]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_page")
+
+[node name="Background" type="ColorRect" parent="." unique_id=935863743]
+material = SubResource("ShaderMaterial_bg")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101961, 0.109804, 0.125489, 1)
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=512915263]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 18
+
+[node name="Root" type="VBoxContainer" parent="Margin" unique_id=208348931]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Header" type="HBoxContainer" parent="Margin/Root" unique_id=1275274877]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Margin/Root/Header" unique_id=362415055]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "下载 Minecraft"
+
+[node name="HeaderSpacer" type="Control" parent="Margin/Root/Header" unique_id=2041217484]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SourceCaption" type="Label" parent="Margin/Root/Header" unique_id=509091585]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+text = "下载源"
+
+[node name="SourceOption" type="OptionButton" parent="Margin/Root/Header" unique_id=1449054127]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+
+[node name="SpeedTestButton" type="Button" parent="Margin/Root/Header" unique_id=853976239]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "同时探测官方源与镜像源，自动选择更快的一个"
+text = "测速"
+
+[node name="SourceStatus" type="Label" parent="Margin/Root/Header" unique_id=1832768137]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+text = "尚未测速"
+
+[node name="SettingsButton" type="Button" parent="Margin/Root/Header" unique_id=46859283]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "下载设置：并发数、完整性校验、强制重下、自定义镜像"
+text = "设置"
+
+[node name="Body" type="HBoxContainer" parent="Margin/Root" unique_id=616928720]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 14
+
+[node name="LeftPanel" type="PanelContainer" parent="Margin/Root/Body" unique_id=10486137]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.7
+
+[node name="LeftMargin" type="MarginContainer" parent="Margin/Root/Body/LeftPanel" unique_id=1039197059]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="LeftBox" type="VBoxContainer" parent="Margin/Root/Body/LeftPanel/LeftMargin" unique_id=1899433358]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="FilterRow" type="HBoxContainer" parent="Margin/Root/Body/LeftPanel/LeftMargin/LeftBox" unique_id=402533522]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FilterOption" type="OptionButton" parent="Margin/Root/Body/LeftPanel/LeftMargin/LeftBox/FilterRow" unique_id=469299931]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(118, 0)
+layout_mode = 2
+
+[node name="SortOption" type="OptionButton" parent="Margin/Root/Body/LeftPanel/LeftMargin/LeftBox/FilterRow" unique_id=981439950]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(152, 0)
+layout_mode = 2
+tooltip_text = "版本排序方式"
+
+[node name="SearchEdit" type="LineEdit" parent="Margin/Root/Body/LeftPanel/LeftMargin/LeftBox/FilterRow" unique_id=323016224]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "搜索版本号，例如 1.20"
+clear_button_enabled = true
+
+[node name="RefreshButton" type="Button" parent="Margin/Root/Body/LeftPanel/LeftMargin/LeftBox/FilterRow" unique_id=1684557979]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "重新获取版本列表"
+text = "刷新"
+
+[node name="VersionList" type="ItemList" parent="Margin/Root/Body/LeftPanel/LeftMargin/LeftBox" unique_id=913427437]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VersionCount" type="Label" parent="Margin/Root/Body/LeftPanel/LeftMargin/LeftBox" unique_id=250962725]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "共 0 个版本"
+
+[node name="RightPanel" type="PanelContainer" parent="Margin/Root/Body" unique_id=62192712]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RightMargin" type="MarginContainer" parent="Margin/Root/Body/RightPanel" unique_id=1281938335]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 12
+
+[node name="RightScroll" type="ScrollContainer" parent="Margin/Root/Body/RightPanel/RightMargin" unique_id=1848356229]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="RightBox" type="VBoxContainer" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll" unique_id=740784428]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="DetailCaption" type="Label" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=1606114498]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "版本信息"
+
+[node name="VersionName" type="Label" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=145519769]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "未选择版本"
+
+[node name="VersionType" type="Label" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=1121022562]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+text = "—"
+
+[node name="VersionDate" type="Label" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=770174441]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+text = "—"
+
+[node name="PreviewHint" type="Label" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=747992044]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "选择左侧版本后显示文件统计。"
+autowrap_mode = 3
+
+[node name="Sep1" type="HSeparator" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=1721799484]
+layout_mode = 2
+
+[node name="VersionNameCaption" type="Label" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=1745278588]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "版本名字（留空 = 用官方版本号）"
+
+[node name="VersionNameEdit" type="LineEdit" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=173250091]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "会作为 versions/ 下的文件夹名，也会写进版本 JSON 的 id"
+placeholder_text = "例如 我的生存 / 1.21.1-原版"
+
+[node name="PathCaption" type="Label" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=278183723]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "游戏目录（哪个文件夹都行，会在这里建 versions / libraries）"
+
+[node name="PathRow" type="HBoxContainer" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=1749668509]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PathEdit" type="LineEdit" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/PathRow" unique_id=389221931]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "例如 D:/MC 或 D:/MC/.minecraft"
+
+[node name="BrowseButton" type="Button" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/PathRow" unique_id=484982168]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "选一个文件夹当游戏目录"
+text = "浏览…"
+
+[node name="DefaultDirButton" type="Button" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/PathRow" unique_id=540577553]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "用设置里保存的默认目录"
+text = "默认路径"
+
+[node name="FindButton" type="Button" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/PathRow" unique_id=1951248720]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "在常见位置里找已经存在的 .minecraft（含官方启动器自定义的目录）"
+text = "查找"
+
+[node name="PathHint" type="Label" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=553806752]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+theme_override_font_sizes/font_size = 12
+clip_text = true
+
+[node name="JavaHeader" type="HBoxContainer" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=1829098371]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="JavaCaption" type="Label" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/JavaHeader" unique_id=111677745]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "Java 运行时"
+
+[node name="DetectJavaButton" type="Button" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/JavaHeader" unique_id=1088941023]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "重新扫描本机所有位置的 Java"
+text = "检测"
+
+[node name="InstallJavaButton" type="Button" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/JavaHeader" unique_id=1925840574]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "把当前版本需要的 Java 装到下面的路径"
+text = "安装 Java"
+
+[node name="JavaRow" type="HBoxContainer" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=1977273851]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="JavaSpinner" type="Control" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/JavaRow" unique_id=367800154]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+script = ExtResource("2_spinner")
+
+[node name="JavaStatus" type="Label" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/JavaRow" unique_id=1805899307]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "未检测"
+clip_text = true
+
+[node name="JavaPathRow" type="HBoxContainer" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=248967398]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="JavaTargetEdit" type="LineEdit" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/JavaPathRow" unique_id=1558057771]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "点「选择…」挑一个文件夹，Java 会装到 <该文件夹>/runtime"
+placeholder_text = "Java 安装路径（留空 = 游戏目录/runtime）"
+clear_button_enabled = true
+
+[node name="PickJavaTargetButton" type="Button" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/JavaPathRow" unique_id=2018687045]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "选择 Java 安装到哪个文件夹"
+text = "选择…"
+
+[node name="LoaderHeader" type="HBoxContainer" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=2043000700]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LoaderCaption" type="Label" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/LoaderHeader" unique_id=1806740577]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "加载器"
+
+[node name="LoaderOption" type="OptionButton" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/LoaderHeader" unique_id=1610547079]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+tooltip_text = "给当前选中的版本装 Fabric / Quilt / Forge"
+
+[node name="LoaderVerRow" type="HBoxContainer" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=920712271]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LoaderVersionOption" type="OptionButton" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/LoaderVerRow" unique_id=180533194]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "加载器版本"
+
+[node name="LoaderManualEdit" type="LineEdit" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/LoaderVerRow" unique_id=531755872]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "自动拉不到版本列表时才需要手填"
+placeholder_text = "手填版本号，如 21.1.54"
+
+[node name="LoaderStatus" type="Label" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=2024089179]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+theme_override_font_sizes/font_size = 12
+clip_text = true
+
+[node name="Sep2" type="HSeparator" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=1884356339]
+layout_mode = 2
+
+[node name="ProgressLabel" type="Label" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=1274626709]
+unique_name_in_owner = true
+layout_mode = 2
+text = "等待开始"
+
+[node name="ProgressBar" type="ProgressBar" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=1269173743]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+show_percentage = false
+
+[node name="SpeedLabel" type="Label" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=38321736]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "速度：—"
+
+[node name="RightSpacer" type="Control" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=1896539257]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Buttons" type="HBoxContainer" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=1511122004]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="StartButton" type="Button" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/Buttons" unique_id=1843013186]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "只下载游戏文件；Java 需要你自己点「安装」"
+disabled = true
+text = "开始下载"
+
+[node name="PauseButton" type="Button" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/Buttons" unique_id=33869274]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "不再开始新任务，正在传的文件会传完"
+disabled = true
+text = "暂停"
+
+[node name="CancelButton" type="Button" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox/Buttons" unique_id=58237444]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "立即中断下载，已完成的文件保留"
+disabled = true
+text = "取消"
+
+[node name="StatusLabel" type="Label" parent="Margin/Root/Body/RightPanel/RightMargin/RightScroll/RightBox" unique_id=419043144]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "准备就绪。"
+autowrap_mode = 3
+
+[node name="Footer" type="HBoxContainer" parent="Margin/Root" unique_id=1487377438]
+layout_mode = 2
+
+[node name="DisclaimerLabel" type="Label" parent="Margin/Root/Footer" unique_id=96919734]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.45098, 0.478431, 0.533333, 1)
+theme_override_font_sizes/font_size = 12
+text = "gl下载器 · 第三方非官方工具，与官方无关 · 游戏文件在下载时从官方或镜像源获取，本软件不附带任何游戏文件，请使用自己的正版账号"
+autowrap_mode = 3
+
+[node name="SettingsPopup" type="PopupPanel" parent="." unique_id=2021430690]
+unique_name_in_owner = true
+
+[node name="SettingsMargin" type="MarginContainer" parent="SettingsPopup" unique_id=1990951452]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 666.0
+offset_bottom = 509.0
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 16
+
+[node name="SettingsRoot" type="VBoxContainer" parent="SettingsPopup/SettingsMargin" unique_id=1799764419]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SettingsScroll" type="ScrollContainer" parent="SettingsPopup/SettingsMargin/SettingsRoot" unique_id=814537705]
+custom_minimum_size = Vector2(432, 470)
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="SettingsBox" type="VBoxContainer" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll" unique_id=1716847894]
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="SettingsTitle" type="Label" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=1754888166]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "下载设置"
+
+[node name="SettingsSep1" type="HSeparator" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=422276620]
+layout_mode = 2
+
+[node name="ConcRow" type="HBoxContainer" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=849967219]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ConcLabel" type="Label" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox/ConcRow" unique_id=575519687]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "同时下载的文件数"
+
+[node name="ConcurrencySpin" type="SpinBox" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox/ConcRow" unique_id=942924930]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 64.0
+value = 16.0
+
+[node name="ConcHint" type="Label" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=1481307901]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45098, 0.478431, 0.533333, 1)
+theme_override_font_sizes/font_size = 12
+text = "1 = 单线程最稳，8~16 通常能跑满带宽。
+调太高可能被镜像源限速。下载中修改可立即生效。"
+
+[node name="DefaultDirLabel" type="Label" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=1897025263]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "默认游戏目录（启动检查和「默认路径」按钮都用这个）"
+
+[node name="DefaultDirRow" type="HBoxContainer" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=1845312460]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="DefaultDirSettingEdit" type="LineEdit" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox/DefaultDirRow" unique_id=1375640420]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "可以手输，也可以点右边浏览选一个文件夹"
+placeholder_text = "留空 = %APPDATA%/.minecraft"
+
+[node name="DefaultDirSettingBrowse" type="Button" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox/DefaultDirRow" unique_id=1667240684]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "选择默认游戏目录"
+text = "浏览…"
+
+[node name="AskOnStartCheck" type="CheckBox" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=2112313973]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "关了就不会每次启动都问"
+text = "启动时检查默认游戏目录（找不到就问要不要创建）"
+
+[node name="SearchModeLabel" type="Label" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=829776845]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "搜索模式（Mod / 整合包等）"
+
+[node name="SearchModeOption" type="OptionButton" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=141651043]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "只搜名称：本地过滤标题｜名称+简介：接口默认｜翻译后搜索：中文先翻成英文再搜"
+
+[node name="JavaMirrorLabel" type="Label" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=2033518926]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "Java 下载源（自动 = 测速后挑快的）"
+
+[node name="JavaMirrorOption" type="OptionButton" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=2089123730]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "清华镜像国内快；官方 GitHub 在部分网络下会连不上"
+
+[node name="ModMirrorLabel" type="Label" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=1065266653]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.596078, 0.627451, 0.682353, 1)
+theme_override_font_sizes/font_size = 13
+text = "Mod 接口镜像（留空 = 官方 Modrinth）"
+
+[node name="ModMirrorEdit" type="LineEdit" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=785735252]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "自建反代地址，留空就是官方 api.modrinth.com"
+placeholder_text = "例如 https://你的反代/api/v2"
+
+[node name="SettingsSep2" type="HSeparator" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=272131066]
+layout_mode = 2
+
+[node name="VerifyCheck" type="CheckBox" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=322999092]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+text = "下载后校验 SHA-1（推荐，能发现被截断或损坏的文件）"
+
+[node name="ForceCheck" type="CheckBox" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=1043259439]
+unique_name_in_owner = true
+layout_mode = 2
+text = "强制重新下载已存在的文件（忽略本地已有文件）"
+
+[node name="SkipHint" type="Label" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=1152050496]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45098, 0.478431, 0.533333, 1)
+theme_override_font_sizes/font_size = 12
+text = "关闭强制重下时，大小一致的文件会被跳过，
+所以中途取消后再点「开始下载」就是续传。"
+
+[node name="AutoJavaCheck" type="CheckBox" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=1614423424]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+text = "切换版本时自动检测 Java（关闭后不再检测）"
+
+[node name="JavaLicenseHint" type="Label" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=400208449]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45098, 0.478431, 0.533333, 1)
+theme_override_font_sizes/font_size = 12
+text = "使用 Eclipse Temurin（GPLv2 + Classpath Exception，可自由使用与分享）。
+本软件不打包任何 JRE，只下载到「游戏目录/runtime/」并按 SHA-256 校验。"
+
+[node name="SettingsSep3" type="HSeparator" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=154593317]
+layout_mode = 2
+
+[node name="MirrorLabel" type="Label" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=786139345]
+layout_mode = 2
+text = "自定义镜像根地址"
+
+[node name="MirrorEdit" type="LineEdit" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=1454344771]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "留空则使用 BMCLAPI：https://bmclapi2.bangbang93.com"
+clear_button_enabled = true
+
+[node name="MirrorHint" type="Label" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=80397152]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45098, 0.478431, 0.533333, 1)
+theme_override_font_sizes/font_size = 12
+text = "自定义镜像需遵循 BMCLAPI 的路径布局：
+/mc、/v1、/assets、/maven（例如自建反代、校内镜像）。"
+
+[node name="CreditLabel" type="Label" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=1172616675]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45098, 0.478431, 0.533333, 1)
+theme_override_font_sizes/font_size = 12
+text = "镜像加速由 BMCLAPI 提供（公益服务，请勿滥用：并发别开太高、不要预缓存全量资源）。"
+
+[node name="ZoomRow" type="HBoxContainer" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=251466683]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ZoomLabel" type="Label" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox/ZoomRow" unique_id=756162172]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "界面缩放"
+
+[node name="ZoomOption" type="OptionButton" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox/ZoomRow" unique_id=1475890512]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="ZoomHint" type="Label" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=2115341504]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45098, 0.478431, 0.533333, 1)
+theme_override_font_sizes/font_size = 12
+text = "自适应 = 按窗口等比放大：窗口更宽就加宽版面，更高就多显示版本，不留黑边。"
+
+[node name="ScaleReadout" type="Label" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsScroll/SettingsBox" unique_id=649044592]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45098, 0.478431, 0.533333, 1)
+theme_override_font_sizes/font_size = 12
+text = "窗口 — ｜ 界面实际缩放 —"
+
+[node name="SettingsButtons" type="HBoxContainer" parent="SettingsPopup/SettingsMargin/SettingsRoot" unique_id=1981010217]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ResetDefaultsButton" type="Button" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsButtons" unique_id=934490567]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "把这一页的下载设置恢复为默认值"
+text = "恢复默认"
+
+[node name="SettingsSpacer" type="Control" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsButtons" unique_id=1800507418]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SettingsCloseButton" type="Button" parent="SettingsPopup/SettingsMargin/SettingsRoot/SettingsButtons" unique_id=39296560]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "关闭设置"
+text = "完成"
+
+[node name="JavaTargetDialog" type="FileDialog" parent="." unique_id=1913981685]
+unique_name_in_owner = true
+title = "Open a Directory"
+initial_position = 2
+size = Vector2i(780, 520)
+ok_button_text = "用这个文件夹"
+file_mode = 2
+access = 2
+use_native_dialog = true
+
+[node name="JavaFolderDialog" type="FileDialog" parent="." unique_id=802714752]
+unique_name_in_owner = true
+title = "Open a Directory"
+initial_position = 2
+size = Vector2i(780, 520)
+ok_button_text = "使用这个 Java"
+file_mode = 2
+access = 2
+use_native_dialog = true
+
+[node name="FolderDialog" type="FileDialog" parent="." unique_id=1617597988]
+unique_name_in_owner = true
+title = "Open a Directory"
+initial_position = 2
+size = Vector2i(760, 500)
+ok_button_text = "选择此文件夹"
+file_mode = 2
+access = 2
+use_native_dialog = true
